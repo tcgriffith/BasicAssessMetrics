@@ -117,7 +117,8 @@ if __name__ == '__main__':
         with open(sys.argv[1]) as f: 
              linelist = f.readlines()
         linelist = [line.rstrip('\n') for line in linelist]
-        native = [s for s in linelist if not "_M" in s][0]  
+        linelist = [s for s in linelist if "_M" in s]
+        native = [s for s in linelist if  "_M1.pdb" in s][0]  
          
         for s in linelist:
             rslt = InteractionNetworkFidelity(s,None, native, None)

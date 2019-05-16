@@ -117,11 +117,19 @@ if __name__ == '__main__':
         with open(sys.argv[1]) as f: 
              linelist = f.readlines()
         linelist = [line.rstrip('\n') for line in linelist]
-        native = [s for s in linelist if not "_M" in s][0]  
-         
+        native = [s for s in linelist if "_RNA" in s][0]  
+        if len(sys.argv) == 4:
+            native_ind = sys.argv[2]
+            model_ind = sys.argv[3]
+        #native=sys.argv[2] 
         for s in linelist:
-            rslt = InteractionNetworkFidelity(s,None, native, None)
-	    print("{} {} {} {} {}".format(s,native,rslt[0], rslt[1], rslt[2]))
+        #s=sys.argv[1]
+        #native=sys.argv[2]
+            if len(sys.argv) == 2:
+                rslt = InteractionNetworkFidelity(native,None, s, None)
+	    else:
+                rslt = InteractionNetworkFidelity(native,native_ind, s, model_ind)
+            print("{} {} {} {} {}".format(s,native,rslt[0], rslt[1], rslt[2]))
 
 
 	# print(InteractionNetworkFidelity(sys.argv[1],None, sys.argv[2], None))
